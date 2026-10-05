@@ -1,0 +1,26 @@
+name: Day 2 GitHub Actions
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+  
+jobs:
+  build:
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Show repository files
+        run: ls
+
+
+      - name: Show current directory
+        run: pwd
+
+      - name: Print Message
+        run: echo "This is Day 2 of GitHub Actions"
+
