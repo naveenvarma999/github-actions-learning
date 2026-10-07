@@ -1,0 +1,93 @@
+# Day 3 — with, env, and secrets
+
+# 1. with: — give input to an Action
+# Example:
+# - name: Setup Python
+#   uses: actions/setup-python@v5
+#   with:
+#     python-version: "3.11"
+
+# Meaning:
+# uses → use the ready-made setup-python action
+
+# with → give information to that action
+
+# python-version → install Python 3.11
+
+# Think like a function:
+# setup_python(version="3.11")
+
+
+# So:
+# with: = inputs/configuration for uses:
+
+
+
+
+
+# 2. env: — environment variables
+
+# Suppose you don't want to repeatedly write:
+# github-actions-learning
+
+# You can store it in a variable:
+
+# env:
+#   APP_NAME: github-actions-learning
+
+# Then use it:
+# - name: Print app name
+#   run: echo $APP_NAME
+
+
+
+# Full example:
+# name: Day 3
+
+# on:
+#   workflow_dispatch:
+
+# env:
+#   APP_NAME: github-actions-learning
+
+# jobs:
+#   demo:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Print app name
+#         run: echo "Application is $APP_NAME"
+
+# Output:
+# Application is github-actions-learning
+
+# So:
+# env: = store values in variables.
+
+
+
+name: Day3 Github Actions
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  APP_NAME: github-actions-learning
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        run: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Print app name
+        run: echo "Application is $APP_NAME"
