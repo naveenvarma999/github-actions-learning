@@ -1,0 +1,34 @@
+name: Day 5 Conditiond
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build Application
+        run: echo "Build Application"
+    
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Application
+        run: echo "Test Application"
+
+  Deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: Ubuntu-latest
+
+    steps:
+      - name: Deploy application
+        run: echo "Deploy Application"
+
+
+
