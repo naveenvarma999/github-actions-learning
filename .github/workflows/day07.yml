@@ -1,0 +1,20 @@
+# Artifact = a file produced by your workflow that you want GitHub
+#  to keep after the runner is gone.
+
+name: Day7 Artifact
+on:
+  workflow_dispatch
+jobs:
+  create_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create file
+        run: echo "Hello from GitHub Actions" > output.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+
+        with:
+          name: My output
+          path: output.txt
