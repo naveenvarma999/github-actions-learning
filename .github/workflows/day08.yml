@@ -1,0 +1,36 @@
+# Day 8 — Downloading artifacts between jobs
+name: Day8 Download Artifact
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu latest
+
+    steps:
+      - name: Create File
+        run: echo "Hii" > app.txt
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-file
+          path: app.txt
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+
+        with:
+          name: build file
+
+      - name: read file
+        run: cat app.txt
+    
