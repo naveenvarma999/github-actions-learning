@@ -1,0 +1,29 @@
+# Day 10 — Caching dependencies
+# Today we’ll learn cache.
+# Cache means saving downloaded dependencies so the next workflow run can be faster.
+
+
+name: Day 10 Cache
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest
