@@ -1,0 +1,38 @@
+# Day 9 — permissions in GitHub Actions
+
+# permissions: controls what your GitHub Actions workflow is allowed to do.
+
+name: Day 9 permissions
+on:
+  workflow_dispatch
+
+permissions: 
+  contents:
+    read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: show files
+        run: ls
+
+
+
+# Other common permissions
+# You may see:
+# permissions:
+#   contents: read
+#   issues: write
+#   pull-requests: write
+
+# Meaning:
+# contents → can read code
+# issues → can modify issues
+# pull-requests → can modify PRs
+
+  
