@@ -1,0 +1,32 @@
+# Day 11 — Environment variables at different levels
+
+# Today we’ll learn one important GitHub Actions concept:
+# env: can be defined at different levels, and that changes where the variable is available.
+
+name: Day 11 Environment Variables
+
+on:
+  workflow_dispatch:
+
+env:
+  my_app: Git-Hub Actions Learning
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      BUILD_ENV: My development
+
+    steps:
+      - name: show workflow Variable
+        run: echo "Environment is $my_app"
+
+      - name: show job variable
+        run: echo "Enviromnet is $BUILD_ENV"
+
+      - name: Step variable
+        env:
+          MESSAGE: Hello
+        run: echo "$MESSAGE"
+
