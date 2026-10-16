@@ -1,0 +1,21 @@
+name: Day 12 Expressions
+
+on:
+  workflow_dispatch:
+
+env:
+  APP_NAME: my-app
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show GitHub information
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "User: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
+
+      - name: Show environment variable
+        run: echo "App: $APP_NAME"
