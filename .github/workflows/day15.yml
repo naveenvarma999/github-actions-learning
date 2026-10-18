@@ -1,0 +1,34 @@
+# Day 15 — Push Docker image to a registry
+# A registry is a place where Docker images are stored.
+
+name: Day 15 Docker Push
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io \
+          -u "${{ github.actor }}" \
+          --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build \
+          -t ghcr.io/${{ github.repository_owner }}/my-app:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/my-app:latest
